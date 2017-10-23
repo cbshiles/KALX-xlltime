@@ -1,0 +1,162 @@
+<developerConceptualDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <summary>
+    <para><codeInline>&lt;ctime&gt;</codeInline>
+  </para>
+  </summary>
+  <introduction>
+    <para>Time routines from the C standard library.</para>
+  </introduction>
+  <section>
+    <title>Overview</title>
+    <content>
+      <para>
+        These routines convert universal time to broken down time and vice verse.
+        Local times are determined by the environment variable <environmentVariable>TZ</environmentVariable>.
+      </para>
+    </content>
+    <sections>
+      <section>
+        <title>Global Variables</title>
+        <content>
+          <para>
+            The function <codeInline>_tzset</codeInline> uses the environment variable <environmentVariable>TZ</environmentVariable>
+            to set three global variables: <codeInline>_daylight</codeInline>, <codeInline>_timezone</codeInline>, and
+            <codeInline>_tzname</codeInline>. These variables are used by 
+            <codeInline>localtime</codeInline> to adjust
+            from coordinated universal time (UTC) to local time, and by the <codeInline>time</codeInline>
+            function to compute UTC from system time.
+          </para>
+        </content>
+      </section>
+      <section>
+        <title>Data Types</title>
+        <content>
+          <para>
+            The time routines use two data types, a <codeInline>time_t</codeInline> which is usually a 64-bit
+            integer type indicating the number of seconds since midnight, January 1, 1970, and a
+            <codeInline>struct tm</codeInline> that contains the following fields:
+          </para>
+          <table>
+            <row>
+              <entry>
+                <para>tm_year</para>
+              </entry>
+              <entry>
+                <para>Year (current year minus 1900)</para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>tm_mon</para>
+              </entry>
+              <entry>
+                <para>Month (0–11; January = 0)</para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>tm_mday</para>
+              </entry>
+              <entry>
+                <para>
+                  Day of month (1–31)
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>tm_hour</para>
+              </entry>
+              <entry>
+                <para>
+                  Hours since midnight (0–23)
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>tm_min</para>
+              </entry>
+              <entry>
+                <para>
+                  Minutes after hour (0–59)
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>tm_sec</para>
+              </entry>
+              <entry>
+                <para>
+                  Seconds after minute (0–59)
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>tm_isdst</para>
+              </entry>
+              <entry>
+                <para>
+                  Positive if daylight saving time is in effect;
+                  0 if daylight saving time is not in effect; negative if status of daylight saving time is unknown.
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>tm_wday</para>
+              </entry>
+              <entry>
+                <para>
+                  Day of week (0–6; Sunday = 0)
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>tm_yday</para>
+              </entry>
+              <entry>
+                <para>
+                  Day of year (0–365; January 1 = 0)
+                </para>
+              </entry>
+            </row>
+          </table>
+          <para>
+            In Excel this is represented by an array of 9 elements: the year (not minus 1900), month (with January = 1),
+            day, hour, minute, second, dst, day of week (with Sunday = 0), and day of year (with January 1 = 0).
+          </para>
+        </content>
+      </section>
+      <section>
+        <title>Time functions</title>
+        <content>
+          <para>
+            The function <codeInline>asctime</codeInline> provides a character representation of a broken
+            down time in either local time or GMT. The function <codeInline>ctime</codeInline> provides
+            a character representation from a UTC <codeInline>time_t</codeInline>.
+          </para>
+          <para>
+            The functions <codeInline>mktime</codeInline>
+            and <codeInline>localtime</codeInline> convert UTC to broken down times. The later adjusts for
+            local time zones based on the global variables controlled by <environmentVariable>TZ</environmentVariable>.
+          </para>
+          <para>
+            The functions <codeInline>mkgmtime</codeInline> and <codeInline>mktime</codeInline> convert broken down
+            times to UTC. The later uses local time and adjusts for the time zone.
+          </para>
+        </content>    
+      </section>
+    </sections>
+  </section>
+  <relatedTopics>
+    
+  </relatedTopics>
+</developerConceptualDocument>
+
